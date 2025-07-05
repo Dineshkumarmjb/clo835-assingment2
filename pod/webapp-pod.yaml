@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: webapp-pod
+  labels:
+    app: webapp
+spec:
+  containers:
+  - name: webapp
+    image: 788420915243.dkr.ecr.us-east-1.amazonaws.com/clo835-webapp:latest
+    ports:
+    - containerPort: 8080
+    env:
+    - name: DBHOST
+      value: "10.244.0.9"  # or the IP of your MySQL pod
+    - name: DBPORT
+      value: "3306"
+    - name: DBUSER
+      value: "root"  # adjust as needed
+    - name: DBPWD
+      value: "root"
+  imagePullSecrets:
+  - name: ecr-secret
